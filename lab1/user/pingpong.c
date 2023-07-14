@@ -25,11 +25,11 @@ main(int argc, char *argv[]) {
     }
 
     if (pid == 0) {  // child
-        // Close write end of the pipe
+
         close(parentToChild[1]);    // close write end of parent-to-child pipe
         close(childToParent[0]);    // close read end of child-to-parent pipe
         
-        // Read byte from parent
+        // child read byte from parent
         char byte;
         n = read(parentToChild[0], &byte, 1);
         if (n == 1) {
