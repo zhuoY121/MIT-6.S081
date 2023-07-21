@@ -10,6 +10,6 @@
 
 ## Labs
 
-- [Lab 1: Xv6 and Unix utilities](./lab1/README)
+- [Lab 1: Xv6 and Unix utilities](./lab1)
   - [Lab 1-Notes](./lab1/lab1.md)
 
