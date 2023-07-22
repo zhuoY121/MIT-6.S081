@@ -18,7 +18,7 @@ getFileName(char *path)
 }
 
 void
-findFile(char *path, char *target) 
+findFile(char *path, char *name) 
 {
     char buf[512], *p;
     int fd;
@@ -38,7 +38,7 @@ findFile(char *path, char *target)
 
     switch (st.type) {
         case T_FILE:
-            if (strcmp(getFileName(path), target) == 0) {    // equal to file name
+            if (strcmp(getFileName(path), name) == 0) {    // equal to file name
                 printf("%s\n", path);
             }
             break;
@@ -65,13 +65,7 @@ findFile(char *path, char *target)
                 memmove(p, de.name, DIRSIZ);
                 p[DIRSIZ] = 0;  // indicate the end of the path
 
-                if(stat(buf, &st) < 0){
-                    printf("ls: cannot stat %s\n", buf);
-                    continue;
-                }
-
-                // printf("%s %d %d %d\n", fmtname(buf), st.type, st.ino, st.size);
-                findFile(buf, target);
+                findFile(buf, name);
             }
 
             break;
