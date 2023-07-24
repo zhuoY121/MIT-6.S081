@@ -108,3 +108,25 @@ sys_trace(void)
   myproc()->mask = mask;
   return 0;
 }
+
+//
+uint64
+sys_sysinfo(void)
+{
+  struct proc *p = myproc();
+  uint64 addr; // user pointer to struct sysinfo
+
+  if(argaddr(0, &addr) < 0)
+    return -1;
+  
+  uint64 nfreemem = get_freemem();
+  uint64 nprocesses = get_nproc();
+
+  if(copyout(p->pagetable, addr, (char *)&nfreemem, sizeof(nfreemem)) < 0 || 
+    copyout(p->pagetable, addr + sizeof(nfreemem), (char *)&nprocesses, sizeof(nprocesses)) < 0) {
+
+      return -1;
+    }
+    
+  return 0;
+}
