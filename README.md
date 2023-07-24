@@ -12,4 +12,5 @@
 
 - [Lab 1: Xv6 and Unix utilities](./lab1)
   - [Lab 1-Notes](./lab1/lab1.md)
-
+- [Lab 2: System calls](./lab2-syscall)
+  - [Lab 2-Notes](./lab2-syscall/lab2-syscall.md)
