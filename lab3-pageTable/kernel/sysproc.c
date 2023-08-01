@@ -81,6 +81,38 @@ int
 sys_pgaccess(void)
 {
   // lab pgtbl: your code here.
+  uint64 va;
+  int n;
+  uint64 mask_addr;
+
+  if(argaddr(0, &va) < 0)
+    return -1;
+
+  if(argint(1, &n) < 0)
+    return -1;
+
+  if(argaddr(2, &mask_addr) < 0)
+    return -1;
+
+  // Upper limit on the number of pages that can be scanned
+  if(n > 64)
+	  return -1;
+
+  uint64 abits = 0;
+  struct proc *p = myproc();
+  
+  for (int i = 0; i < n; i++) {
+    pte_t *pte = walk(p->pagetable, va + i * PGSIZE, 0);
+
+    if (pte != 0 && (*pte & PTE_A) != 0) {
+      abits |= 1 << i;  // set access bit
+      *pte &= ~PTE_A;   // clear PTE_A
+    }
+  }
+
+  if(copyout(p->pagetable, mask_addr, (char *)&abits, sizeof(abits)) < 0)
+      return -1;
+
   return 0;
 }
 #endif
