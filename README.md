@@ -15,3 +15,5 @@
   - [Lab 2-Notes](./lab2-syscall/lab2-syscall.md)
 - [Lab 3: Page Tables](./lab3-pageTable)
   - [Lab 3-Notes](./lab3-pageTable/lab3.md)
+- [Lab 4: Traps](./lab4-traps)
+  - [Lab 4-Notes](./lab4-traps/lab4.md)
